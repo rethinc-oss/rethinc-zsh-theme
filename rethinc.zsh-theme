@@ -35,4 +35,11 @@ PROMPT+='%F{015}%#%(?. .!) %{$reset_color%}'
 # }}}
 
 # Configure 'ls' colors
-export LS_COLORS=$LS_COLORS:'no=00:di=00;33:ln=target:ex=01;37'
+LS_COLORS=${(*)LS_COLORS/no=[^:]#/no=00}
+LS_COLORS=${(*)LS_COLORS/di=[^:]#/di=00;33}
+LS_COLORS=${(*)LS_COLORS/ln=[^:]#/ln=target}
+LS_COLORS=${(*)LS_COLORS/ex=[^:]#/ex=01;37}
+export LS_COLORS
+
+# Configure completion colors
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
